@@ -2,8 +2,8 @@
 
 // Build Parameters
 properties([ parameters([
-  string( name: 'AWS_ACCESS_KEY_ID', defaultValue: ''),
-  string( name: 'AWS_SECRET_ACCESS_KEY', defaultValue: '')
+  string( name: 'AWS_ACCESS_KEY_ID', defaultValue: 'AKIAIBAOMVHPGXGFVUOQ'),
+  string( name: 'AWS_SECRET_ACCESS_KEY', defaultValue: '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')
 ]), pipelineTriggers([]) ])
 
 // Environment Variables
@@ -11,7 +11,8 @@ env.AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID
 env.AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY
 
 node {
-  env.PATH += ":/opt/terraform_0.7.13/"
+  def tfHome = tool name: 'Terraform', type: 'com.cloudbees.jenkins.plugins.customtools.CustomTool'
+    env.PATH = "${tfHome}:${env.PATH}"
 
   stage ('Checkout') {
     checkout scm
@@ -35,8 +36,8 @@ node {
   }
 
   stage ('Notification') {
-    mail from: "jenkins@mycompany.com",
-         to: "devopsteam@mycompany.com",
+    mail from: "tsprasath91@gmail.com",
+         to: "tsprasath91@gmail.com",
          subject: "Terraform build complete",
          body: "Jenkins job ${env.JOB_NAME} - build ${env.BUILD_NUMBER} complete"
   }
