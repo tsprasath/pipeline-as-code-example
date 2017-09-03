@@ -15,6 +15,7 @@ node {
     env.PATH = "${tfHome}:${env.PATH}"
 
   stage ('Checkout') {
+    deleteDir()
     checkout scm
   }
 
