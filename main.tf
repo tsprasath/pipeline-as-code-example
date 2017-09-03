@@ -13,14 +13,6 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
-#resource "aws_instance" "example" {
- #   ami = "ami-6e1a0117"
-  #  instance_type = "t2.micro"
-   # tags {
-    #   Name = "Terraform"
-#}
-
-
 resource "aws_launch_configuration" "test-lc" {
   name_prefix = "test-lc-"
   image_id = "${data.aws_ami.ubuntu.id}"
