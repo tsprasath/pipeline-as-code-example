@@ -20,13 +20,18 @@ data "aws_ami" "ubuntu" {
     #   Name = "Terraform"
 #}
 
+resource "aws_key_pair" "prasath" {
+-  key_name = "prasath"
+-  public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx0Jf1esX92CKy8ue88VJ5LK/PCHWvz8JMHpgS8lOIfFj3wIjxs418Ty9uVHsDjST19oSldFbgjGJCE9GyI57tuDCvh8Iesoitb8lLFioFmHcl9nDu378Ts5sbAOQyJa5Ec2Br/xIu2w8XAhz5FwczXrtdNCNhh9WzpgfM1Vy6wr/Mrtv3B1f2yc4ajEcvDtPiHlHaDWjlCYcdQ3MPf/rhjOOmwekDyzxlzObOxt0hXJ4vac9wtnUbNNXrQ2E9HoYeHFZtqWvU31108XXtBtFKh/GAhiDitVT4lnKQvcKDukvp8HXsuTROSnSRLcFAPJEmxo4DykPyolJdy3VhlMa1QIDAQAB"
+-}
+
 
 resource "aws_launch_configuration" "test-lc" {
   name_prefix = "test-lc-"
   image_id = "${data.aws_ami.ubuntu.id}"
   instance_type = "${var.instance_type}"
 
-  key_name = "${var.key_name}"
+  
   security_groups = [ "${aws_security_group.instance.id}" ]
 
   lifecycle {
