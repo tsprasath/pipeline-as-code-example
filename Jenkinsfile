@@ -20,6 +20,8 @@ node {
   }
 
   stage ('Terraform Plan') {
+    sh 'terraform init'
+    sh 'terraform providers'
     sh 'terraform plan -no-color -out=create.tfplan'
   }
 
